@@ -1,36 +1,44 @@
 import React from "react";
+import { Button,Select,Radio,RadioGroup,ModalBody,Modal,Input, useDisclosure } from '@chakra-ui/react';
 
-const AddProduct = () => {
+
+const AddProduct = ({products,setProducts}) => {
   // TODO: Remove below const and instead import them from chakra
-  const Button = () => <div />;
-  const Modal = () => <div />;
-  const ModalBody = () => <div />;
-  const Input = () => <div />;
-  const Select = () => <div />;
-  const RadioGroup = () => <div />;
-  const Radio = () => <div />;
-
+  const { isOpen, onOpend, onClosed } = useDisclosure()
+  
+  
+  const handleSubmit=()=>{
+    onClosed();
+ 
+  }
   return (
     <>
-      <Button my={4} data-cy="add-product-button"></Button>
-      <Modal>
+
+      <Button my={4} data-cy="add-product-button" onClick={onOpend}>Add Product</Button>
+      <Modal isOpen={isOpen} onClose={onClosed}>
         <ModalBody pb={6}>
-          <Input data-cy="add-product-title" />
-          <Select data-cy="add-product-category">
-            <option data-cy="add-product-category-shirt"></option>
-            <option data-cy="add-product-category-pant"></option>
-            <option data-cy="add-product-category-jeans"></option>
+          <h1>Add New Product</h1>
+          <h2>Title</h2>
+          <Input data-cy="add-product-title" placeholder="Title"/>
+          <h2>Category</h2>
+          <Select data-cy="add-product-category"  placeholder="Select Category">
+            <option data-cy="add-product-category-shirt">Shirt</option>
+            <option data-cy="add-product-category-pant">Pant</option>
+            <option data-cy="add-product-category-jeans">Jeans</option>
           </Select>
+          <h2>Gender</h2>
           <RadioGroup data-cy="add-product-gender">
-            <Radio data-cy="add-product-gender-male"></Radio>
-            <Radio data-cy="add-product-gender-female"></Radio>
-            <Radio data-cy="add-product-gender-unisex"></Radio>
+            <Radio data-cy="add-product-gender-male">Male</Radio>
+            <Radio data-cy="add-product-gender-female">Female</Radio>
+            <Radio data-cy="add-product-gender-unisex">Unisex</Radio>
           </RadioGroup>
-          <Input data-cy="add-product-price" />
-          <Button data-cy="add-product-submit-button"></Button>
+          <h2>Price</h2>
+          <Input data-cy="add-product-price" placeholder="Rs. Price" />
+          <Button data-cy="add-product-submit-button" onClick={handleSubmit}>Create</Button>
         </ModalBody>
       </Modal>
-    </>
+
+    </>  
   );
 };
 
